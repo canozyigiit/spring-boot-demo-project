@@ -15,25 +15,31 @@ import java.util.List;
 @RestController
 @RequestMapping("/usercontroller")
 public class UserController {
-    private final UserService userService;
-    private final UserMapper userMapper;
+    private UserService userService;
+    private UserMapper userMapper;
 
-    @Autowired
-    public UserController(UserService userService,
-                          UserMapper userMapper){
+    public UserController(UserService userService, UserMapper userMapper) {
         this.userService = userService;
         this.userMapper = userMapper;
     }
+
     @GetMapping("/getall")
     public List<User> getAll(){
         return userService.getAll();
+    }
+    @GetMapping("/getalldto")
+    public ResponseEntity<List<UserDto>> getAllDto(){
+        List<User> userList = userService.getAll();
+        List<UserDto> userDtos = userMapper.userDtos(userList);
+        return ResponseEntity.ok(userDtos);
     }
     @GetMapping("/getbyemail")
     public User getByEmail(@RequestParam String email){
         return userService.getByEmail(email);
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<UserDto> findById(@PathVariable int id)
+
+    @GetMapping("/getbyiddto")
+    public ResponseEntity<UserDto> findById(@RequestParam int id)
     {
         User user = userService.getById(id);
         UserDto userDto = userMapper.toUserDto(user);

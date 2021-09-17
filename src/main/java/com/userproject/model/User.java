@@ -1,9 +1,7 @@
 package com.userproject.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -12,6 +10,8 @@ import java.time.LocalDate;
 
 
 @Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -57,5 +57,7 @@ public class User {
     @NotNull
     private Long nationalityId;
 
-
+    public String getEmail() {
+        return email;
+    }
 }
