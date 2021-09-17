@@ -4,9 +4,6 @@ import com.userproject.service.UserService;
 import com.userproject.dto.UserDto;
 import com.userproject.mapper.UserMapper;
 import com.userproject.model.User;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
-
-import org.springframework.hateoas.Link;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -69,11 +66,11 @@ public class UserController {
 
     @PutMapping("update")
     public void Update(@RequestParam int id,@RequestBody User user){
-        var links = new Link[]{
-                linkTo(methodOn(UserController.class).getAll()).withRel("User").withType("GET"),
-                linkTo(methodOn(UserController.class).getById(user.getId())).withRel("User").withType("GET")
-        };
-        user.add(links);
+//        var links = new Link[]{
+//                linkTo(methodOn(UserController.class).getAll()).withRel("User").withType("GET"),
+//                linkTo(methodOn(UserController.class).getById(user.getId())).withRel("User").withType("GET")
+//        };
+//        user.add(links);
         userService.Update(id,user);
     }
 }

@@ -34,8 +34,8 @@ public class LoggingAspect
         stopWatch.stop();
 
         //Log method execution time
-        LOGGER.info("Execution time of " + className + "." + methodName + " :: " + stopWatch.getTotalTimeMillis() + " ms");
-        log.info("Method çalıştı: " +" " + className+"."+methodName+ " :: " + stopWatch.getTotalTimeMillis() + " ms");
+        LOGGER.info("Execution time of " + className + "." + methodName + " :: " + stopWatch.getTotalTimeMillis() + " ms");//console
+        log.info("Working method: " +" " + className+"."+methodName+ " :: " + stopWatch.getTotalTimeMillis() + " ms");//txt
         return result;
     }
 }

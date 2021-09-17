@@ -17,7 +17,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Entity
 @Table(name="users")
-public class User extends RepresentationModel<User> {
+public class User
+//        extends RepresentationModel<User>
+{
 
     @Id
     @Column(name="id")
@@ -36,7 +38,7 @@ public class User extends RepresentationModel<User> {
 
     @Column(name="email",unique = true)
     @NotBlank
-    @Email(message = "Email should be valid")
+    @Email(message = "Email uygun değil")
     @Size(max = 50)
     private String email;
 
