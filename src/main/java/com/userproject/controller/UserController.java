@@ -4,8 +4,9 @@ import com.userproject.Service.UserService;
 import com.userproject.dto.UserDto;
 import com.userproject.mapper.UserMapper;
 import com.userproject.model.User;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+
+import org.springframework.hateoas.Link;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,11 +48,17 @@ public class UserController {
     }
     @GetMapping("/getbyid")
     public User getById(@RequestParam int id){
+
         return userService.getById(id);
     }
 
     @PostMapping("/add")
     public ResponseEntity<?> Add(@Valid @RequestBody User user){
+        var links = new Link[]{
+                linkTo(methodOn(UserController.class).getAll()).withRel("User").withType("GET"),
+        linkTo(methodOn(UserController.class).getById(user.getId())).withRel("User").withType("GET")
+        };
+        user.add(links);
         return ResponseEntity.ok(userService.Add(user));
     }
 
@@ -62,6 +69,11 @@ public class UserController {
 
     @PutMapping("update")
     public void Update(@RequestParam int id,@RequestBody User user){
+        var links = new Link[]{
+                linkTo(methodOn(UserController.class).getAll()).withRel("User").withType("GET"),
+                linkTo(methodOn(UserController.class).getById(user.getId())).withRel("User").withType("GET")
+        };
+        user.add(links);
         userService.Update(id,user);
     }
 }
