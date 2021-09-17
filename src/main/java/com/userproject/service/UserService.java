@@ -1,4 +1,4 @@
-package com.userproject.Service;
+package com.userproject.service;
 
 import com.userproject.model.User;
 

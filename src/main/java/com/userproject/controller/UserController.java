@@ -1,6 +1,6 @@
 package com.userproject.controller;
 
-import com.userproject.Service.UserService;
+import com.userproject.service.UserService;
 import com.userproject.dto.UserDto;
 import com.userproject.mapper.UserMapper;
 import com.userproject.model.User;
@@ -54,11 +54,11 @@ public class UserController {
 
     @PostMapping("/add")
     public ResponseEntity<?> Add(@Valid @RequestBody User user){
-        var links = new Link[]{
-                linkTo(methodOn(UserController.class).getAll()).withRel("User").withType("GET"),
-        linkTo(methodOn(UserController.class).getById(user.getId())).withRel("User").withType("GET")
-        };
-        user.add(links);
+//        var links = new Link[]{
+//                linkTo(methodOn(UserController.class).getAll()).withRel("User").withType("GET"),
+//                linkTo(methodOn(UserController.class).getById(user.getId()).toString()).withRel("User").withType("GET")
+//        };
+//        user.add(links);
         return ResponseEntity.ok(userService.Add(user));
     }
 
