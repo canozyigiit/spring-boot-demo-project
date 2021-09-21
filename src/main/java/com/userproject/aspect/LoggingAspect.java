@@ -38,8 +38,8 @@ public class LoggingAspect
         stopWatch.stop();
 
         //Log method execution time
-        LOGGER.info("Execution time of " + className + "." + methodName + " :: " + stopWatch.getTotalTimeMillis() + " ms");//console
-        log.info("Working method: " +" " + className +"."+ methodName+ " parameters: " + Arrays.toString(parameters)+" return type: " + returnType + " :: " + stopWatch.getTotalTimeMillis() + " ms");//txt
+        LOGGER.info("Working method: " +" " + className +"."+ methodName+ " parameters: " + Arrays.toString(parameters)+" return type: " + returnType + " :: " + stopWatch.getTotalTimeMillis() + " ms");//console
+//        log.info("Working method: " +" " + className +"."+ methodName+ " parameters: " + Arrays.toString(parameters)+" return type: " + returnType + " :: " + stopWatch.getTotalTimeMillis() + " ms");//txt
         return result;
     }
 }
