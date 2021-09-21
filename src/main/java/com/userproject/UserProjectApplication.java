@@ -36,7 +36,7 @@ public class UserProjectApplication {
         return new ApiInfoBuilder()
                 .title("USER CRUD PROJECT")
                 .description("Demo Project")
-                .contact(new Contact("Can","https://detaysoft.com/","muhammetcanozyigit@gmail.com"))
+                .contact(new Contact("Can Ozyigit","https://github.com/canozyigiit/UserDemoProject","muhammetcanozyigit@gmail.com"))
                 .version("1.0.0")
                 .build();
     }

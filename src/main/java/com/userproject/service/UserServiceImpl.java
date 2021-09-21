@@ -4,7 +4,12 @@ import com.userproject.model.User;
 import com.userproject.repository.UserRepository;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
+import org.springframework.cache.annotation.Cacheable;
+
 
 import java.util.List;
 
@@ -21,30 +26,35 @@ public class UserServiceImpl implements UserService {
 
     }
     @Override
+    @Cacheable("User_Response")
     public User getById(int id) {
         return userRepository.findById(id).orElse(null);
     }
 
     @Override
+    @Cacheable("userResponse")
     public User getByEmail(String email) {
         return userRepository.getByEmail(email);
     }
 
+    @Cacheable("userCache")
     @Override
     public List<User> getAll() {
         return userRepository.findAll();
     }
 
     @Override
+    @Caching(put = {@CachePut(value = "User_Response")}, evict = {@CacheEvict(value = "userCache", allEntries = true)})
     public User Add(User user) {
 
         userRepository.save(user);
-        log.info("Kullanıcı kayıt oldu ->"+user.getEmail());
+        log.info("Kullanıcı kayıt oldu -> "+user.getEmail());
         return user;
 
     }
 
     @Override
+    @Caching(put = {@CachePut(value = "User_Response")}, evict = {@CacheEvict(value = "userCache", allEntries = true)})
     public void Update(int id,User user) {
         User oldUser = userRepository.getById(id);
         oldUser.setEmail(user.getEmail());
@@ -58,6 +68,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Caching(put = {@CachePut(value = "User_Response")}, evict = {@CacheEvict(value = "userCache", allEntries = true)})
     public void Delete(int id) {
         User user = userRepository.getById(id);
         userRepository.delete(user);

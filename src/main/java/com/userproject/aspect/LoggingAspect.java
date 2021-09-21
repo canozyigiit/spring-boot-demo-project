@@ -10,6 +10,8 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
+import java.util.Arrays;
+
 @Aspect
 @Component
 @Log4j
@@ -24,6 +26,8 @@ public class LoggingAspect
 
         //Get intercepted method details
         String className = methodSignature.getDeclaringType().getSimpleName();
+        String returnType = methodSignature.getReturnType().getSimpleName();
+        String[] parameters = methodSignature.getParameterNames();
         String methodName = methodSignature.getName();
 
         final StopWatch stopWatch = new StopWatch();
@@ -35,7 +39,7 @@ public class LoggingAspect
 
         //Log method execution time
         LOGGER.info("Execution time of " + className + "." + methodName + " :: " + stopWatch.getTotalTimeMillis() + " ms");//console
-        log.info("Working method: " +" " + className+"."+methodName+ " :: " + stopWatch.getTotalTimeMillis() + " ms");//txt
+        log.info("Working method: " +" " + className +"."+ methodName+ " parameters: " + Arrays.toString(parameters)+" return type: " + returnType + " :: " + stopWatch.getTotalTimeMillis() + " ms");//txt
         return result;
     }
 }
